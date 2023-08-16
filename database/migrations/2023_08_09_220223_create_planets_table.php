@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('size', 10, 2);
             $table->decimal('average_temperature', 5, 2);
             $table->decimal('gravity', 7, 4);
+            $table->boolean('inhabited')->deafult(false);
             $table->timestamps();
         });
     }

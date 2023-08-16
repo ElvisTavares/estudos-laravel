@@ -23,6 +23,7 @@ class PlanetFactory extends Factory
             'size'=> fake()->randomFloat(2, 1000, 50000),
             'average_temperature'=> fake()->numberBetween(-100, 100),
             'gravity'=> fake()->randomFloat(2, 1, 30),
+            'inhabited' => fake()->boolean(),
         ];
     }
 }

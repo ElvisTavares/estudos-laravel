@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Planet\PlanetController;
+use App\Models\Planet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('planets', [PlanetController::class, 'index']);
+Route::post('planets/create', [PlanetController::class, 'store']);
+Route::get('planets/{id}', [PlanetController::class, 'show']);
+Route::get('planets/{planet}/satellites', function ($planet) {
+    $planet = Planet::with('satellites')->findOrFail($planet);
+    return $planet->satellites;
+});
+
+Route::patch('/planet/{planet}', function(Planet $planet, Request $request) {
+    $planet->inhabited = $request->inhabited;
+    $planet->save();
+    return $planet;
+});
