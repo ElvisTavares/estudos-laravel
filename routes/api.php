@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('planets', [PlanetController::class, 'index']);
+Route::get('planets', [PlanetController::class, 'index'])->middleware('rate.limit');
 Route::post('planets/create', [PlanetController::class, 'store']);
 Route::get('planets/{id}', [PlanetController::class, 'show']);
 Route::get('planets/{planet}/satellites', function ($planet) {
