@@ -20,3 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('planets', [PlanetController::class, 'index']);
+Route::get('planets/c', [PlanetController::class, 'saveToCache']);
+Route::get('planets/list', [PlanetController::class, 'getInfo']);
