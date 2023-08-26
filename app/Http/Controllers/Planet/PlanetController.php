@@ -61,4 +61,16 @@ class PlanetController extends Controller
         Planet::destroy($planet);
         return response()->noContent();
     }
+
+    //filter
+    public function search(Request $request)
+    {
+        $query = Planet::query();
+
+        if($request->has('name')) {
+            $query->where('name', $request->name);
+        }
+
+        return $query->paginate(5);
+    }
 }

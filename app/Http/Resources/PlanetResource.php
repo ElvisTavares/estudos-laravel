@@ -20,6 +20,7 @@ class PlanetResource extends JsonResource
             'size' => $this->size,
             'average_temperature' => $this->average_temperature,
             'gravity' => $this->gravity,
+            'inhabited' => $this->inhabited
         ];
     }
 }
