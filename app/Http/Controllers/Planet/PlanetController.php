@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Planet;
 
+use App\Exceptions\PlanetNotFoundException;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PlanetResource;
 use App\Models\Planet;
 use App\Repositories\PlanetRepositories;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class PlanetController extends Controller
 {
@@ -39,13 +42,18 @@ class PlanetController extends Controller
 
     public function show(int $id)
     {
-        $planet = Planet::with('satellites')->find($id);
-
-        if($planet === null) {
-            return response()->json(['message' => 'Planet not found'], 404);
+     
+        try {
+            $planet = Planet::with('satellites')->find($id);
+            throw new PlanetNotFoundException('Erro');
+            return $planet;
+        } catch (PlanetNotFoundException $e) {
+            Log::error('Planet Not found');
+            return view('error.planet', ['message' => $e->getMessage()]);
         }
-
-        return $planet;
+        // if($planet === null) {
+        //     return response()->json(['message' => 'Planet not found'], 404);
+        // }
     }
 
     public function update(Planet $planet, Request $request)
