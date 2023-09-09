@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Planet\PlanetController;
+use App\Http\Controllers\uploadImageController;
 use App\Models\Planet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,5 @@ Route::patch('/planet/{planet}', function(Planet $planet, Request $request) {
     $planet->save();
     return $planet;
 });
+
+Route::post('/upload', [uploadImageController::class, 'uploadImage'])->name('upload');
