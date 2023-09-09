@@ -18,12 +18,16 @@
 
     <form method="post" action="{{ route('validation') }}">
         @csrf
-        <label for="email">Email</label>
+        <label for="email">Nome</label>
         <input type="email" id="email" name="email"> 
         <br>
 
-        <label for="password">Email</label>
+        <label for="password">Senha</label>
         <input type="password" id="password" name="password"> 
+        <br>
+
+        <label for="birth_year">Ano nascimento</label>
+        <input type="text" id="birth_year" name="birth_year"> 
         <br>
 
         <button type="submit">Login</button>

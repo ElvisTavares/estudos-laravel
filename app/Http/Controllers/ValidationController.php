@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 
 class ValidationController extends Controller
@@ -11,11 +12,8 @@ class ValidationController extends Controller
         return view('login');
     }
 
-    public function validateForm(Request $request)
+    public function validateForm(UserRequest $request)
     {
-        $this->validate($request, [
-            'username' => 'required|max:8',
-            'password' => 'required', 
-        ]);
+        dd($request);
     }
 }
