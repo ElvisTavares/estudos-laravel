@@ -73,13 +73,17 @@ class PlanetController extends Controller
 
     public function getPlanet()
     {
+        //chave unica para este cache
         $cacheKey = 'planetas';
 
+        //verifica se os dados estao salvo em cache
         if(Cache::has($cacheKey)) {
+            //se os dados estiverem em cache, recupereos do cache
             $planetas = Cache::get($cacheKey);
         } else {
+            //se os dados nao estiverem em cache, consulta o banco
             $planetas = Planet::all();
-
+            //armazena os dados em cache por 10 minutos
             Cache::put($cacheKey, $planetas, now()->addMinutes(10));
         }
 
