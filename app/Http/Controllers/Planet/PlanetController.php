@@ -9,6 +9,7 @@ use App\Models\Planet;
 use App\Repositories\PlanetRepositories;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class PlanetController extends Controller
@@ -68,5 +69,20 @@ class PlanetController extends Controller
     {
         Planet::destroy($planet);
         return response()->noContent();
+    }
+
+    public function getPlanet()
+    {
+        $cacheKey = 'planetas';
+
+        if(Cache::has($cacheKey)) {
+            $planetas = Cache::get($cacheKey);
+        } else {
+            $planetas = Planet::all();
+
+            Cache::put($cacheKey, $planetas, now()->addMinutes(10));
+        }
+
+        return response()->json(['planets' => $planetas]);
     }
 }

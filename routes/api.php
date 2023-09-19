@@ -36,3 +36,5 @@ Route::patch('/planet/{planet}', function(Planet $planet, Request $request) {
 });
 
 Route::post('/upload', [uploadImageController::class, 'uploadImage'])->name('upload');
+
+Route::get('planetas', [PlanetController::class, 'getPlanet']);
